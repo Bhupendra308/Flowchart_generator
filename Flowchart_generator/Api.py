@@ -12,7 +12,7 @@ def make_api_call(content):
     }
     headers = {
         "content-type": "application/json",
-        "x-rapidapi-key": "8e78024b1cmsh6b6c6140597751fp18d9e3jsn81dc3f112100",
+        "x-rapidapi-key": "your_api_key",
 	    "x-rapidapi-host": "chatgpt-42.p.rapidapi.com"
     }
     response = requests.post(url, json=payload, headers=headers)

@@ -34,7 +34,7 @@ def make_api_call(content):
 #     }
 #     headers = {
 #         "content-type": "application/json",
-#         "x-rapidapi-key": "d50f129f04mshbf790f804f64106p171775jsne9f14b504087",
+#         "x-rapidapi-key": "your_api_key",
 # 	     "x-rapidapi-host": "open-ai21.p.rapidapi.com"
 
 #     }
@@ -55,7 +55,7 @@ def make_api_call(content):
 #         "web_access": False
 #     }
 #     headers = {
-#         "x-rapidapi-key": "8e78024b1cmsh6b6c6140597751fp18d9e3jsn81dc3f112100",
+#         "x-rapidapi-key": "your_api_key",
 # 	    "x-rapidapi-host": "chatgpt-api8.p.rapidapi.com",
 # 	    "content-type": "application/json"
 # }
@@ -74,7 +74,7 @@ def make_api_call(content):
 #     }
     
 #     headers = {
-#         "x-rapidapi-key": "8e78024b1cmsh6b6c6140597751fp18d9e3jsn81dc3f112100",
+#         "x-rapidapi-key": "your_api_key",
 #         "x-rapidapi-host": "infinite-gpt.p.rapidapi.com",
 #         "Content-Type": "application/json"
 #     }
@@ -91,7 +91,7 @@ def make_api_call(content):
 #     querystring = {"question": question}
     
 #     headers = {
-#         "x-rapidapi-key": "8e78024b1cmsh6b6c6140597751fp18d9e3jsn81dc3f112100",
+#         "x-rapidapi-key": "your_api_key",
 #         "x-rapidapi-host": "chat-gpt-3-5-turbo2.p.rapidapi.com"
 #     }
     

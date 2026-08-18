@@ -1,6 +1,12 @@
 import requests
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 def make_api_call(content):
-    url = "https://chatgpt-42.p.rapidapi.com/gpt4"
+    url = os.getenv("API_URL")
     payload = {
         "messages": [
             {
@@ -12,8 +18,8 @@ def make_api_call(content):
     }
     headers = {
         "content-type": "application/json",
-        "x-rapidapi-key": "your_api_key",
-	    "x-rapidapi-host": "chatgpt-42.p.rapidapi.com"
+        "x-rapidapi-key": os.getenv("RAPIDAPI_KEY"),
+        "x-rapidapi-host": os.getenv("RAPIDAPI_HOST")
     }
     response = requests.post(url, json=payload, headers=headers)
     return response.json()

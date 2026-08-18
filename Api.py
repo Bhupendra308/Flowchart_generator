@@ -2,104 +2,37 @@ import requests
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
 load_dotenv()
 
+def get_active_api_config():
+    active_api = os.getenv("ACTIVE_API", "api1").lower()
+    api_num = active_api.replace("api", "")
+    
+    url = os.getenv(f"API{api_num}_URL")
+    api_key = os.getenv(f"API{api_num}_KEY")
+    api_host = os.getenv(f"API{api_num}_HOST")
+    
+    if not url or not api_key or not api_host:
+        return None
+    
+    return {"url": url, "key": api_key, "host": api_host, "api": active_api}
+
 def make_api_call(content):
-    url = os.getenv("API_URL")
+    config = get_active_api_config()
+    
+    if not config:
+        raise ValueError("No valid API configuration found. Check ACTIVE_API and API credentials in .env")
+    
     payload = {
-        "messages": [
-            {
-                "role": "user",
-                "content": content
-            }
-        ],
+        "messages": [{"role": "user", "content": content}],
         "web_access": False
     }
+    
     headers = {
         "content-type": "application/json",
-        "x-rapidapi-key": os.getenv("RAPIDAPI_KEY"),
-        "x-rapidapi-host": os.getenv("RAPIDAPI_HOST")
+        "x-rapidapi-key": config["key"],
+        "x-rapidapi-host": config["host"]
     }
-    response = requests.post(url, json=payload, headers=headers)
+    
+    response = requests.post(config["url"], json=payload, headers=headers)
     return response.json()
-
-
-
-# import requests
-# def make_api_call(content):
-#     url = "https://open-ai21.p.rapidapi.com/"
-#     payload = {
-#         "messages": [
-#             {
-#                 "role": "user",
-#                 "content": content
-#             }
-#         ],
-#         "web_access": False
-#     }
-#     headers = {
-#         "content-type": "application/json",
-#         "x-rapidapi-key": "your_api_key",
-# 	     "x-rapidapi-host": "open-ai21.p.rapidapi.com"
-
-#     }
-#     response = requests.post(url, json=payload, headers=headers)
-#     return response.json()
-
-
-# import requests
-# def make_api_call(content):
-#     url = "https://chatgpt-api8.p.rapidapi.com/gpt4"
-#     payload = {
-#         "messages": [
-#             {
-#                 "role": "user",
-#                 "content": content
-#             }
-#         ],
-#         "web_access": False
-#     }
-#     headers = {
-#         "x-rapidapi-key": "your_api_key",
-# 	    "x-rapidapi-host": "chatgpt-api8.p.rapidapi.com",
-# 	    "content-type": "application/json"
-# }
-#     response = requests.post(url, json=payload, headers=headers)
-#     return response.json()
-
-
-# import requests
-
-# def make_api_call(query, sys_msg="You are a friendly Chatbot."):
-#     url = "https://infinite-gpt.p.rapidapi.com/infinite-gpt"
-    
-#     payload = {
-#         "query": query,
-#         "sysMsg": sys_msg
-#     }
-    
-#     headers = {
-#         "x-rapidapi-key": "your_api_key",
-#         "x-rapidapi-host": "infinite-gpt.p.rapidapi.com",
-#         "Content-Type": "application/json"
-#     }
-    
-#     response = requests.post(url, json=payload, headers=headers)
-#     return response.json()
-
-
-# import requests
-
-# def make_api_call(question):
-#     url = "https://chat-gpt-3-5-turbo2.p.rapidapi.com/problem.json"
-    
-#     querystring = {"question": question}
-    
-#     headers = {
-#         "x-rapidapi-key": "your_api_key",
-#         "x-rapidapi-host": "chat-gpt-3-5-turbo2.p.rapidapi.com"
-#     }
-    
-#     response = requests.get(url, headers=headers, params=querystring)
-#     return response.json()
